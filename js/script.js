@@ -385,6 +385,60 @@ const initScrollObserver = () => {
 };
 
 // ========================================
+// 9. LIVE PAYMENT NOTIFICATION POPUPS
+// ========================================
+const initPaymentNotifications = () => {
+  const popup = document.getElementById('payment-notification');
+  const textEl = document.getElementById('notification-text');
+  const timeEl = document.getElementById('notification-timestamp');
+  const closeBtn = document.getElementById('notification-close');
+
+  if (!popup || !textEl) return;
+
+  const notifications = [
+    { text: 'Someone from P.H. just paid', amount: '₦10,000', time: '2 mins ago' },
+    { text: 'A customer from Lagos just paid', amount: '₦10,000', time: 'Just now' },
+    { text: 'Someone from Kwara just paid', amount: '₦10,000', time: '4 mins ago' }
+  ];
+
+  let currentIndex = 0;
+  let isDismissed = false;
+  let timerId = null;
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      isDismissed = true;
+      popup.classList.remove('show');
+      if (timerId) clearTimeout(timerId);
+    });
+  }
+
+  const showNextNotification = () => {
+    if (isDismissed) return;
+
+    const data = notifications[currentIndex];
+    textEl.innerHTML = `${data.text} <strong class="notification-amount">${data.amount}</strong>`;
+    if (timeEl) timeEl.textContent = data.time;
+
+    popup.classList.add('show');
+
+    // Stay visible for 4.5 seconds, then hide
+    timerId = setTimeout(() => {
+      popup.classList.remove('show');
+
+      // Increment index
+      currentIndex = (currentIndex + 1) % notifications.length;
+
+      // Pause 7 seconds before showing the next one
+      timerId = setTimeout(showNextNotification, 7000);
+    }, 4500);
+  };
+
+  // Initial display after 4 seconds
+  timerId = setTimeout(showNextNotification, 4000);
+};
+
+// ========================================
 // INITIALIZATION
 // ========================================
 const init = () => {
@@ -396,6 +450,7 @@ const init = () => {
   initTestimonialCarousel();
   initSmoothScrolling();
   initScrollObserver();
+  initPaymentNotifications();
 };
 
 document.addEventListener('DOMContentLoaded', init);

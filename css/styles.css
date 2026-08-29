@@ -1712,6 +1712,94 @@ section {
 }
 
 /* ==========================================================================
+   LIVE PAYMENT NOTIFICATION POPUP
+   ========================================================================== */
+.payment-notification {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 98;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  box-shadow: var(--shadow-md);
+  max-width: 360px;
+  transform: translateY(120%) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.payment-notification.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.notification-badge-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(52, 211, 153, 0.18);
+  color: var(--color-success);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
+}
+
+.notification-body {
+  flex-grow: 1;
+}
+
+.notification-text {
+  font-size: 0.875rem;
+  color: var(--color-text);
+  line-height: 1.35;
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.notification-amount {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+.notification-timestamp {
+  font-size: 0.725rem;
+  color: var(--color-text-muted);
+  display: block;
+}
+
+.notification-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.notification-close-btn:hover {
+  color: var(--color-text);
+}
+
+/* ==========================================================================
    RESPONSIVE MEDIA QUERIES
    ========================================================================== */
 @media (max-width: 768px) {
@@ -1747,6 +1835,13 @@ section {
   
   .announcement-link {
     display: none;
+  }
+
+  .payment-notification {
+    left: 16px;
+    bottom: 80px;
+    max-width: calc(100vw - 32px);
+    padding: 10px 14px;
   }
 }
 
