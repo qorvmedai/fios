@@ -233,18 +233,23 @@ const initStudentCarousel = () => {
 
   // Tab click events
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => showBatch(index));
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      showBatch(index);
+    });
   });
 
   // Prev / Next button events
   if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       if (currentBatch > 0) showBatch(currentBatch - 1);
     });
   }
 
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       if (currentBatch < totalBatches - 1) showBatch(currentBatch + 1);
     });
   }
@@ -390,15 +395,22 @@ const initScrollObserver = () => {
 const initPaymentNotifications = () => {
   const popup = document.getElementById('payment-notification');
   const textEl = document.getElementById('notification-text');
-  const timeEl = document.getElementById('notification-timestamp');
   const closeBtn = document.getElementById('notification-close');
 
   if (!popup || !textEl) return;
 
+  // Editable notification list: [Student Name] from [University] just made a payment
   const notifications = [
-    { text: 'Someone from P.H. just paid', amount: '₦10,000', time: '2 mins ago' },
-    { text: 'A customer from Lagos just paid', amount: '₦10,000', time: 'Just now' },
-    { text: 'Someone from Kwara just paid', amount: '₦10,000', time: '4 mins ago' }
+    { name: 'Abdusamiu', school: 'UNILAG' },
+    { name: 'Favour', school: 'LASU' },
+    { name: 'Daniel', school: 'UNILORIN' },
+    { name: 'Precious', school: 'KWASU' },
+    { name: 'David', school: 'University of Ibadan' },
+    { name: 'Esther', school: 'ABU Zaria' },
+    { name: 'Chiamaka', school: 'UNN' },
+    { name: 'Michael', school: 'DELSU' },
+    { name: 'Blessing', school: 'AAU' },
+    { name: 'Samuel', school: 'UNIBEN' }
   ];
 
   let currentIndex = 0;
@@ -406,7 +418,8 @@ const initPaymentNotifications = () => {
   let timerId = null;
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       isDismissed = true;
       popup.classList.remove('show');
       if (timerId) clearTimeout(timerId);
@@ -417,21 +430,20 @@ const initPaymentNotifications = () => {
     if (isDismissed) return;
 
     const data = notifications[currentIndex];
-    textEl.innerHTML = `${data.text} <strong class="notification-amount">${data.amount}</strong>`;
-    if (timeEl) timeEl.textContent = data.time;
+    textEl.innerHTML = `<strong>${data.name}</strong> from <strong>${data.school}</strong> just made a payment`;
 
     popup.classList.add('show');
 
-    // Stay visible for 4.5 seconds, then hide
+    // Display for 4 seconds, then slide out
     timerId = setTimeout(() => {
       popup.classList.remove('show');
 
-      // Increment index
+      // Next index in array
       currentIndex = (currentIndex + 1) % notifications.length;
 
-      // Pause 7 seconds before showing the next one
-      timerId = setTimeout(showNextNotification, 7000);
-    }, 4500);
+      // Pause 6 seconds before showing next
+      timerId = setTimeout(showNextNotification, 6000);
+    }, 4000);
   };
 
   // Initial display after 4 seconds

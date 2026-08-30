@@ -959,11 +959,17 @@ section {
   display: none;
 }
 
+.student-id-grid {
+  min-height: 480px;
+}
+
 .student-id-batch.active {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   animation: fadeIn 0.4s ease;
+  min-height: 480px;
+  align-content: start;
 }
 
 @keyframes fadeIn {
