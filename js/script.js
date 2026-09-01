@@ -15,10 +15,10 @@ const CONFIG = {
   // Countdown - auto-resetting 4-day cycle
   countdownCycleDays: 4,
   
-  // Payment Bank Details (Updated to User Copy)
-  paymentPlatform: 'OPAY',
-  accountNumber: '9042447293',
-  accountName: 'CHIDIEBUBE NICHOLAS DIVINE',
+  // Payment Bank Details
+  paymentPlatform: 'Palmpay',
+  accountNumber: '8140770202',
+  accountName: 'Esther Chioma Udeh',
   
   // Content
   programName: 'F.I.I.S',
