@@ -5,8 +5,8 @@
 // ========================================
 const CONFIG = {
   // Pricing
-  currentPrice: '₦10,000',
-  currentPriceRaw: 10000,
+  currentPrice: '₦5,000',
+  currentPriceRaw: 5000,
   originalPrice: '₦65,000',
   originalPriceRaw: 65000,
   spots: 100,
@@ -16,9 +16,9 @@ const CONFIG = {
   countdownCycleDays: 4,
   
   // Payment Bank Details
-  paymentPlatform: 'Palmpay',
-  accountNumber: '8140770202',
-  accountName: 'Esther Chioma Udeh',
+  paymentPlatform: 'Fidelity Bank',
+  accountNumber: '5601772067',
+  accountName: 'Tehilla Amplify Solutions',
   
   // Content
   programName: 'F.I.I.S',
